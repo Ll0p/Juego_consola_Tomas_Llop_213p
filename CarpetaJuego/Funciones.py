@@ -292,12 +292,8 @@ def mostrar_tablero(tablero: tuple[int], posicion: int) -> None:
         casillero = ""
         if i == posicion:
             casillero += "[X]"  
-        elif tablero[i] == 1:
-            casillero += "[1]"
-        elif tablero[i] == 2:
-            casillero += "[2]"
-        elif tablero[i] == 3:
-            casillero += "[3]"
+        elif tablero[i] != 0:
+            casillero += f"[{tablero[i]}]"
         else:
             casillero += "[ ]"
 
