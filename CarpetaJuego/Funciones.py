@@ -217,7 +217,7 @@ def imprimir_lineas() -> None:
 ###################################################################
 
 def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
-    """ Avanza o retrocede un base a la respuesta
+    """ Avanza o retrocede en base a la respuesta
 
     Argumentos:
         posicion (int): Posición actual del jugador.
@@ -240,8 +240,7 @@ def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada
     return posicion
 
 def aplicar_efecto_casilla(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
-    """
-    Aplica escalera o serpiente (solo si es necesario).
+    """ Aplica escalera o serpiente (solo si es necesario).
 
     Argumentos:
         tablero (tuple[int]): EL tablero con efectos.
@@ -293,10 +292,12 @@ def mostrar_tablero(tablero: tuple[int], posicion: int) -> None:
         casillero = ""
         if i == posicion:
             casillero += "[X]"  
-        elif i <= 14 and tablero[i] != 0:
-            casillero += "[S]"
-        elif i >= 16 and tablero[i] != 0:
-            casillero += "[E]"
+        elif tablero[i] == 1:
+            casillero += "[1]"
+        elif tablero[i] == 2:
+            casillero += "[2]"
+        elif tablero[i] == 3:
+            casillero += "[3]"
         else:
             casillero += "[ ]"
 
