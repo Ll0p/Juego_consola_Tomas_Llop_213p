@@ -72,7 +72,7 @@ def verificar_nombre(nombre: str) -> bool:
     Retorna:
         bool: True en caso de que se cumplan ambas condiciones y viceversa
     """
-    from Datos import path
+    from CarpetaJuego.Datos import path
     return verificar_longitud_nombre(nombre) and not verificar_existencia_score(path, nombre)
 
 def verificar_seguir(decision: str) -> bool:
@@ -243,22 +243,70 @@ def aplicar_casilla(tablero: tuple[int], posicion: int, respuesta_verificada: bo
 
     return nueva_posicion
 
-def modificar_posicion(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
-    """ Modifica la posición segun los parametros
+def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
+    """ Avanza o retrocede un base a la respuesta
 
     Argumentos:
-        tablero (tuple[int]): El tablero con efectos.
-        posicion (int): La posición actual del jugador.
-        respuesta (bool): True si respondió bien, False si mal.
+        posicion (int): Posición actual del jugador.
+        respuesta_verificada (bool): True si respondió bien y viceversa
+        largo_tablero (int): Longitud total del tablero.
 
-    Retorno:
-        int: Nueva posición luego de aplicar efectos del casillero.
+    Retorna:
+        int: Nueva posición
     """
     if respuesta_verificada:
         posicion += 1
-    else: 
+    else:
         posicion -= 1
-    return aplicar_casilla(tablero, posicion, respuesta_verificada)
+
+    if posicion < 0:
+        posicion = 0
+    elif posicion >= len(tablero):
+        posicion = (len(tablero) - 1)
+
+    return posicion
+
+def aplicar_efecto_casilla(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
+    """
+    Aplica escalera o serpiente (solo si es necesario).
+
+    Argumentos:
+        tablero (tuple[int]): EL tablero con efectos.
+        posicion (int): Posición actual del jugador.
+        respuesta_verificada (bool): True si respondió bien y viceversa
+
+    Retorna:
+        int: Nueva posición con efecto (si es necesario)
+    """
+    casilla = tablero[posicion]
+
+    if casilla != 0:
+        if respuesta_verificada:
+            posicion += casilla
+        else:
+            posicion -= casilla
+
+        if posicion < 0:
+            posicion = 0
+        elif posicion >= len(tablero):
+            posicion = len(tablero) - 1
+
+    return posicion
+
+def modificar_posicion(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
+    """ Modifica la posición y si hay, el efecto de la casilla
+
+    Argumentos:
+        tablero (tuple[int]): El tablero del juego
+        posicion (int): Posición actual del usuario
+        respuesta_verificada (bool): True en caso de responder bien y viceversa
+
+    Retorna:
+        int: La posición modificada
+    """
+    posicion = mover_por_respuesta(tablero, posicion, respuesta_verificada)
+    posicion = aplicar_efecto_casilla(tablero, posicion, respuesta_verificada)
+    return posicion
 
 def mostrar_tablero(tablero: tuple[int], posicion: int) -> None:
     """ Muestra el tablero 
