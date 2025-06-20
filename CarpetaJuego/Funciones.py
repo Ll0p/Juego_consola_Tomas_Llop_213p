@@ -138,7 +138,7 @@ def verificar_ganador_perdedor(posicion: int, tablero: tuple[int]) -> bool:
     """
     retorno = True
     if posicion <= 0:
-        print("\nPerdiste... caíste al casillero 0. :/")
+        print("\nPerdiste... caíste en la casilla 0. :/")
         retorno = False
     elif posicion >= (len(tablero) - 1):
         print("\nFelicidades, ¡Ganaste! <3")
@@ -215,33 +215,6 @@ def imprimir_lineas() -> None:
     print(f"\n{"-" * 50}")
 
 ###################################################################
-
-def aplicar_casilla(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
-    """ Aplica escalera o serpiente en base a la posición y la respuesta del usuario
-
-    Argumentos:
-        tablero (tuple[int]): Tablero de juego
-        posicion (int): Posición actual del jugador
-        respuesta_verificada (bool): True si respondió bien y viceversa
-
-    Retorna:
-        int: Una nueva posición
-    """
-    mitad = len(tablero) // 2
-    nueva_posicion = posicion
-
-    if tablero[posicion] != 0:
-        if posicion > mitad and respuesta_verificada:
-            nueva_posicion = posicion + tablero[posicion]
-        elif posicion < mitad and not respuesta_verificada:
-            nueva_posicion  = posicion - tablero[posicion]
-
-    if nueva_posicion < 0:
-        nueva_posicion = 0
-    elif nueva_posicion >= len(tablero):
-        nueva_posicion = len(tablero) - 1
-
-    return nueva_posicion
 
 def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
     """ Avanza o retrocede un base a la respuesta
