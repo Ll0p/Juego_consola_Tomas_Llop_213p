@@ -217,7 +217,7 @@ def imprimir_lineas() -> None:
 ###################################################################
 
 def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
-    """ Avanza o retrocede un base a la respuesta
+    """ Avanza o retrocede en base a la respuesta
 
     Argumentos:
         posicion (int): Posición actual del jugador.
