@@ -219,9 +219,9 @@ def imprimir_lineas() -> None:
 def limitar_posicion(posicion: int, tablero: tuple[int]) -> int:
     """Asegura que la posición se mantenga dentro del rango del tablero."""
     if posicion < 0:
-        return 0
+        posicion = 0
     elif posicion >= len(tablero):
-        return len(tablero) - 1
+        posicion = len(tablero) - 1
     return posicion
 
 def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
