@@ -216,6 +216,14 @@ def imprimir_lineas() -> None:
 
 ###################################################################
 
+def limitar_posicion(posicion: int, tablero: tuple[int]) -> int:
+    """Asegura que la posición se mantenga dentro del rango del tablero."""
+    if posicion < 0:
+        return 0
+    elif posicion >= len(tablero):
+        return len(tablero) - 1
+    return posicion
+
 def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
     """ Avanza o retrocede en base a la respuesta
 
@@ -231,13 +239,7 @@ def mover_por_respuesta(tablero: tuple[int], posicion: int, respuesta_verificada
         posicion += 1
     else:
         posicion -= 1
-
-    if posicion < 0:
-        posicion = 0
-    elif posicion >= len(tablero):
-        posicion = (len(tablero) - 1)
-
-    return posicion
+    return limitar_posicion(posicion, tablero)
 
 def aplicar_efecto_casilla(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
     """ Aplica escalera o serpiente (solo si es necesario).
@@ -257,13 +259,7 @@ def aplicar_efecto_casilla(tablero: tuple[int], posicion: int, respuesta_verific
             posicion += casilla
         else:
             posicion -= casilla
-
-        if posicion < 0:
-            posicion = 0
-        elif posicion >= len(tablero):
-            posicion = len(tablero) - 1
-
-    return posicion
+    return limitar_posicion(posicion, tablero)
 
 def modificar_posicion(tablero: tuple[int], posicion: int, respuesta_verificada: bool) -> int:
     """ Modifica la posición y si hay, el efecto de la casilla
