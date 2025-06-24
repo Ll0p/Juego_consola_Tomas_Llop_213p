@@ -51,9 +51,8 @@ def verificar_existencia_score(path_csv, nombre: str) -> bool:
     encontrado = False
     try:
         with open(path_csv, "r", encoding = "UTF-8") as archivo:
-            lineas = archivo.readlines()
-            for linea in lineas:
-                if linea.strip().split(",")[0] == nombre:
+            for linea in archivo:
+                if linea.split(",")[0] == nombre:
                     encontrado = True
                     break
     except FileNotFoundError:
