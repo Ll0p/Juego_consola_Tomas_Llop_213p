@@ -398,7 +398,7 @@ def jugar_en_consola(tablero: tuple[int], preguntas: list[dict[str, str]], path:
     """
     import random
     import copy
-    posicion = 15
+    posicion = 15 # O len(tablero) // 2
     copia_preguntas = copy.deepcopy(preguntas)
 
     nombre = ingresar_respuesta(consultar_nombre, verificar_nombre)
